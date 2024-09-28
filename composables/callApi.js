@@ -5,7 +5,7 @@ export const callApi = async (url, options, token = '') => {
     headers: {
       // 'access-token': `${token}`,
     },
-    baseURL: config.public.baseURL,
+    baseURL: config.public.base_URL,
     ...options
   }
 

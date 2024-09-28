@@ -1,14 +1,18 @@
 <template>
   <div>
-    <div class="text-4xl pl-8 py-4 fixed w-full bg-[#FAFAFA] z-[999999999]">
-      Skarby Polski
+    <div class="px-8 border-b border-[#EFEFF0] py-4 bg-[#FAFAFA] z-[999999999] w-full flex items-center justify-between">
+      <div class="text-4xl">
+        Legendarium
+      </div>
     </div>
-    <slot />
+    <div class="flex">
+      <SideBar />
+      <slot />
+    </div>
   </div>
 </template>
 
 <script setup>
-
 </script>
 
 <style lang="scss" scoped>

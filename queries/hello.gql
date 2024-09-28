@@ -2,6 +2,106 @@ query GetTest{
   hello
 }
 
+mutation AuthGoogleLogin($input: input){
+  authGoogleLogin(input: {}) {
+    sessionToken
+    refreshToken
+  }
+}
+
+query GetUser {
+  userMe {
+    id
+    username
+    email
+    picture
+    type
+    authType
+    badges {
+      id
+      name
+      picture
+    }
+    friends {
+      id
+      username
+      email
+      picture
+      type
+      authType
+      badges{
+        id
+      }
+      friends{
+        id
+        username
+      }
+      distance
+      time
+      completedRoutes
+    }
+    distance
+    time
+    completedRoutes
+  }
+}
+
+
+query GetRoutes{
+  routes {
+    id
+    title
+    description
+    icon
+    distance
+    difficulty
+    lat
+    lng
+    points {
+      title
+      description
+      lat
+      lng
+    }
+  }
+}
+
+query GetHeros{
+  heros {
+    id
+    name
+    description
+    picture
+    excerpt
+  }
+}
+
+mutation LoginUser($input: AuthLoginInput!){
+  authLogin(input: $input) {
+    sessionToken
+    refreshToken
+  }
+}
+
+mutation AuthRegister($input: AuthRegisterInput!) {
+  authRegister(input: $input) {
+    id
+    username
+    email
+    picture
+    type
+    authType
+    badges {
+      id
+      name
+      picture
+    }
+    distance
+    time
+    completedRoutes
+  }
+}
+
 mutation authGoogleLogin($input: GoogleAuthInput!){
   authGoogleLogin(input: $input) {
     sessionToken

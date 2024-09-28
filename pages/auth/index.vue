@@ -1,26 +1,39 @@
 <template>
-  <div class="max-w-[520px] mx-auto mt-24 rounded-xl">
-    <div class="pt-36 pb-12">
-      <div class="flex justify-center">
-        <input placeholder="Email" class="px-2 py-1 border w-8/12 rounded" type="text">
-      </div>
-      <div class="mt-2 flex justify-center">
-        <input placeholder="Password" class="px-2 py-1 border w-8/12 rounded"  type="password">
-      </div>
-      <div class="text-center">
-        Or
-      </div>
-      <div class="flex justify-center">
-        <div class="px-2 py-2 border mx-auto flex items-center justify-center rounded mt-4 gap-2">
-          <img class="w-8" src="~/assets/img/google.svg" alt=""> Login With Google
-        </div>
+  <div> 
+    <div class="mt-16 flex flex-col items-center">
+      <a :href="`${runtimeConfig.public.URL}/google`" @click="" class="bg-[#295046] w-full px-8 py-3.5 rounded-full text-white flex justify-center items-center gap-4">
+       <img src="~/assets/img/google.svg" alt=""> Zaloguj się kontem Google
+      </a>
+      <nuxt-link to="/auth/login" class="rounded-full border-[#295046] border w-full px-8 py-3.5 text-center mt-2">
+        Zaloguj się mailem
+      </nuxt-link>
+
+      <div class="text-center mt-6 font-medium">
+        Nie masz konta? <nuxt-link to="/auth/register" class="underline">Zarejestruj się</nuxt-link>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref} from 'vue';
+const runtimeConfig = useRuntimeConfig()
+definePageMeta({
+  layout: 'auth'
+})
+
+async function handleGoogleLogin(){
+  try{
+    const result = await callApi('/google');
+    console.log(result);
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+onMounted(() => {
+  console.log(runtimeConfig);
+})
 </script>
 
 <style lang="scss" scoped>
