@@ -1,0 +1,10 @@
+query GetTest{
+  hello
+}
+
+mutation authGoogleLogin($input: GoogleAuthInput!){
+  authGoogleLogin(input: $input) {
+    sessionToken
+    refreshToken
+  }
+}
