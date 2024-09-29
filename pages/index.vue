@@ -1,23 +1,17 @@
 <template>
-  <LMap
-    :zoom="13"
-    ref="map"
-    :center="initialPosition"
-    style="height: calc(100vh - 72.8px); width: 100%"
-  >
-    <LTileLayer
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    />
+  <LMap :zoom="13" ref="map" :center="initialPosition" style="height: calc(100vh - 72.8px); width: 100%">
+    <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     <LMarker @click="getRouteDetails(route)" v-for="route in routes" :lat-lng="[route?.lat, route?.lng]"></LMarker>
     <LControlZoom position="bottomright" />
   </LMap>
-  <LeftPanel :visible="detailsVisible">
+  <LeftPanel @close="detailsVisible = false" :visible="detailsVisible">
     <div class="px-6 text-[#19191B] overflow-auto">
-      <div class="text-2xl font-bold ">
+      <div class="text-2xl font-bold text-brush">
         {{ details.title }}
       </div>
       <div class="mt-6 flex gap-6 font-bold">
-        <div>Długość: {{ details.distance }}km</div> <div>Trudność: <span v-for="i in details.difficulty">*</span></div>
+        <div>Długość: {{ details.distance }}km</div>
+        <div>Trudność: <span v-for="i in details.difficulty">*</span></div>
       </div>
       <div class="mt-6">
         {{ details.description }}
@@ -26,15 +20,9 @@
         Trasa
       </div>
       <div class="mt-5 rounded overflow-hidden">
-        <LMap
-          :zoom="13"
-          :options="mapOptions"
-          :center="[details.points[0].lat, details.points[0].lng]"
-          style="height: 250px; width: 100%"
-        >
-          <LTileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+        <LMap :zoom="13" :options="mapOptions" :center="[details.points[0].lat, details.points[0].lng]"
+          style="height: 250px; width: 100%">
+          <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <LMarker v-for="point in details.points" :lat-lng="[point?.lat, point?.lng]"></LMarker>
         </LMap>
       </div>
@@ -44,7 +32,7 @@
 
 <script setup>
 import { LControlZoom } from '@vue-leaflet/vue-leaflet';
-import {onMounted} from 'vue';
+import { onMounted } from 'vue';
 
 const initialPosition = ref([0, 0]);
 const detailsVisible = ref(false);
@@ -76,21 +64,22 @@ const markers = [
   [51.595, -0.18]
 ];
 
-function getRouteDetails(route){
+function getRouteDetails(route) {
   details.value = route;
   detailsVisible.value = true;
+  console.log(details);
 }
 
-function geoSuccess(position){
+function geoSuccess(position) {
   initialPosition.value = [position.coords.latitude, position.coords.longitude]
 }
 
-function geoFail(err){
+function geoFail(err) {
   alert(err.message);
 }
 
 onMounted(async () => {
-  if(navigator.geolocation){
+  if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(geoSuccess, geoFail)
   }
 

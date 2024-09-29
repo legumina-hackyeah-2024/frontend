@@ -3,9 +3,9 @@
     <div class="text-4xl">
       Kronika
     </div>
-    <div class="flex flex-wrap gap-4 text-[#19191B] mt-4">
+    <div class="flex flex-wrap gap-4 text-[#19191B] mt-6">
       <div v-for="hero in heros" @click="getHeroDetails(hero)" class="rounded flex cursor-pointer">
-        <div class="max-w-[180px]">
+        <div class="w-[180px]">
           <img class="" :src="hero.picture" alt="">
         </div>
         <div class="px-4 max-w-[230px] flex flex-col justify-between">
@@ -40,14 +40,14 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue';
+import { onMounted, ref } from 'vue';
 import LeftPanel from '~/components/LeftPanel.vue';
 
 const heros = ref([]);
 const detailsVisible = ref(false);
 const details = ref({});
 
-function getHeroDetails(hero){
+function getHeroDetails(hero) {
   details.value = hero;
   detailsVisible.value = true;
 }
@@ -59,6 +59,4 @@ onMounted(async () => {
 })
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

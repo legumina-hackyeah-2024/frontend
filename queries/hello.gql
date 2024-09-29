@@ -1,11 +1,11 @@
 query GetTest{
   hello
 }
-
-mutation AuthGoogleLogin($input: input){
-  authGoogleLogin(input: {}) {
-    sessionToken
-    refreshToken
+query GetBadges{
+  badges(input: {}) {
+    id
+    name
+    picture
   }
 }
 
@@ -38,11 +38,15 @@ query GetUser {
       }
       distance
       time
-      completedRoutes
+      completedRoutes{
+        routeId
+      }
     }
     distance
     time
-    completedRoutes
+    completedRoutes{
+      routeId
+    }
   }
 }
 
@@ -98,7 +102,9 @@ mutation AuthRegister($input: AuthRegisterInput!) {
     }
     distance
     time
-    completedRoutes
+    completedRoutes{
+      routeId
+    }
   }
 }
 

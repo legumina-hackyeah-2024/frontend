@@ -1,7 +1,17 @@
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-graphql-client', '@pinia/nuxt'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'nuxt-graphql-client',
+    '@pinia/nuxt',
+    ['@nuxtjs/google-fonts', {
+      download: true,
+      families: {
+        'Caveat+Brush': [400]
+      }
+    }]
+  ],
   plugins: [
     '~/plugins/leaflet.js'
   ],
@@ -15,5 +25,5 @@ export default defineNuxtConfig({
       GQL_HOST: 'https://treasures-of-poland.up.railway.app/graphql',
       URL: process.env.base_URL
     }
-  }
+  },
 })

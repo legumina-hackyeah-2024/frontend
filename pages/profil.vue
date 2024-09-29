@@ -1,36 +1,24 @@
 <template>
   <div class="p-8 h flex">
-    <div>
+    <div class="w-[620px]">
       <div>
         <div class="text-[#19191B] font-medium">Twoje Odznaki</div>
         <div class="flex gap-4 flex-wrap mt-6">
-          <div v-for="i in 10" class="w-24 h-24 bg-blue-100 rounded-2xl">
-            
+          <div v-for="badge in userStore.user.badges" :title="badge.name" class="rounded-2xl">
+            <img class="w-20 h-20" :src="badge.picture" alt="">
           </div>
         </div>
       </div>
-      <div class="mt-8">
-        <div class="text-[#19191B] font-medium">
+      <div class="mt-8 text-[#19191B]">
+        <div class="font-medium">
           Statystyki
         </div>
-        <div class="flex gap-2 mt-6">
-          <div v-for="item in stats" class="flex items-center px-2.5 py-4 w-[240px] border border-[#d6d6d6] rounded">
-            <div class="w-6 h-6 bg-[#61646B] mr-4 rounded">
-
-            </div>
-            <div class="font-medium text-[#61646B]">
-              {{ item.text }}: {{ item.val }}
+        <div class="flex flex-col gap-2 mt-6">
+          <div v-for="item in stats" class="flex items-center px-6 py-3 rounded-full bg-[#F6F4F0] w-full">
+            <div class="font-medium flex w-full justify-between">
+              <span>{{ item.text }} </span> <span>{{ item.val }}</span>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="w-[230px]">
-      <div>
-        Twoi Znajomi
-      </div>
-      <div class="flex flex-wrap w-10/12 gap-2 mt-4">
-        <div class="w-16 h-16 rounded-full bg-blue-100" v-for="i in 5">
         </div>
       </div>
     </div>
@@ -38,13 +26,15 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 const stats = [
-  {text: 'Dystans', val: '33km'},
-  {text: 'Godziny', val: '2h 36min'},
-  {text: 'Trasy', val: 5},
+  { text: 'Dystans', val: '33km' },
+  { text: 'Godziny', val: '2h 36min' },
+  { text: 'Trasy', val: 5 },
 ]
+
+const userStore = useUserStore();
+
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
