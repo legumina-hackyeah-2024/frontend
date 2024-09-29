@@ -6,7 +6,7 @@
 
 <script setup>
 useHead({
-  title: 'HackYeah'
+  title: 'Legendarium'
 })
 import { onMounted } from 'vue';
 
