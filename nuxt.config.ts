@@ -22,7 +22,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      GQL_HOST: 'https://treasures-of-poland.up.railway.app/graphql',
+      GQL_HOST: `${process.env.base_URL}/graphql`,
       URL: process.env.base_URL
     }
   },
